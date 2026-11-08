@@ -8,7 +8,7 @@ DROP TRIGGER IF EXISTS trg_validacao_bu;
 
 DELIMITER //
 
-CREATE TRIGGER trg_valida_bi
+CREATE TRIGGER trg_validacao_bi
 BEFORE INSERT ON customer
 FOR EACH ROW
 BEGIN
@@ -26,7 +26,7 @@ END IF;
 	END IF;
 END //
 
-CREATE TRIGGER trg_valida_bu
+CREATE TRIGGER trg_validacao_bu
 BEFORE UPDATE ON customer
 FOR EACH ROW
 BEGIN
