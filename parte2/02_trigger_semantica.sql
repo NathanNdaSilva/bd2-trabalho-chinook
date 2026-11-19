@@ -1,7 +1,7 @@
 
 Para implementar a regra semântica 1, criamos dois triggers na tabela customer: trg_validacao_bi e trg_validacao_bu. O primeiro executa antes da inserção (BEFORE INSERT) e o segundo antes da atualização (BEFORE UPDATE), garantindo a validação em relação a cada linha (FOR EACH ROW). O comando DELIMITER é utilizado para permitir o uso de múltiplos comandos no mesmo bloco. Dentro de cada trigger criou-se uma variável v_cargo VARCHAR(30). Quando uma operação fornece um representante, o trigger consulta a tabela employee, buscando a coluna Title e atribuindo o resultado a v_cargo. Em seguida, é feita uma verificação para ver se v_cargo é diferente de ‘Sales Support Agent’. Caso seja diferente, é disparada uma exceção e a operação de inserção/atualização é cancelada. 
 ```sql
-  USE chinook;
+  USE chinook_autoincrement;
 
 DROP TRIGGER IF EXISTS trg_validacao_bi;
 DROP TRIGGER IF EXISTS trg_validacao_bu;
@@ -21,7 +21,7 @@ BEGIN
 
 		IF v_cargo<>'Sales Support Agent' THEN
 			SIGNAL SQLSTATE '45000'
-SET MESSAGE_TEXT = 'Violação de Regra Semântica: O    funcionário deve ter o cargo Sales Support Agent.'
+SET MESSAGE_TEXT = 'Violação de Regra Semântica: O    funcionário deve ter o cargo Sales Support Agent.';
 END IF;
 	END IF;
 END //
@@ -39,7 +39,7 @@ BEGIN
 
 		IF v_cargo<> 'Sales Support Agent' THEN
 			SIGNAL SQLSTATE '45000'
-SET MESSAGE_TEXT = 'Violação de Regra Semântica: O    funcionário deve ter o cargo Sales Support Agent.'
+SET MESSAGE_TEXT = 'Violação de Regra Semântica: O    funcionário deve ter o cargo Sales Support Agent.';
 END IF;
 	END IF;
 END //
